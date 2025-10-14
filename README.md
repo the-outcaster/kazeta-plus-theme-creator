@@ -2,7 +2,7 @@
 
 ![Screenshot of the application](https://i.imgur.com/Uhk0u0d.png)
 
-A simple, user-friendly GUI application for creating and editing themes for the [Kazeta+](https://github.com/the-outcaster/kazeta-plus) game launcher. This tool streamlines the entire theme creation process, from bundling assets to generating the final `theme.toml` file.
+A simple, user-friendly GUI application for creating and editing themes for [Kazeta+](https://github.com/the-outcaster/kazeta-plus). This tool streamlines the entire theme creation process, from bundling assets to generating the final `theme.toml` file.
 
 ---
 
@@ -96,14 +96,12 @@ If you prefer to run or build the application from its source code, follow these
 
 The repository includes a helper script to build the AppImage.
 
-1.  **Create an icon:** Make sure you have an application icon named `kazeta_icon.png` in the project's root directory. A 256x256 pixel image is recommended.
-
-2.  **Install PyInstaller:**
+1.  **Install PyInstaller:**
     ```bash
     pip install pyinstaller
     ```
 
-3.  **Run the build script:**
+2.  **Run the build script:**
     ```bash
     chmod +x build-appimage.sh
     ./build-appimage.sh
