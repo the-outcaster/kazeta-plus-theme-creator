@@ -1,6 +1,6 @@
 # Kazeta+ Theme Creator
 
-![Screenshot of the application](Screenshot_20251014_135336.png)
+![Screenshot of the application](https://i.imgur.com/Uhk0u0d.png)
 
 A simple, user-friendly GUI application for creating and editing themes for the [Kazeta+](https://github.com/the-outcaster/kazeta-plus) game launcher. This tool streamlines the entire theme creation process, from bundling assets to generating the final `theme.toml` file.
 
@@ -39,7 +39,7 @@ Before you start, you **must** have **FFmpeg** installed on your system. The app
 
 ### Installation
 
-1.  Go to the **[Releases](https://github.com/YOUR_USERNAME/YOUR_REPO/releases)** page of this project.
+1.  Go to the **[Releases](https://github.com/the-outcaster/kazeta-plus-theme-creator/releases)** page of this project.
 2.  Download the latest `KazetaThemeCreator-vX.X-x86_64.AppImage` file.
 3.  Make the file executable:
     ```bash
@@ -65,8 +65,8 @@ If you prefer to run or build the application from its source code, follow these
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/the-outcaster/kazeta-plus-theme-creator.git](https://github.com/the-outcaster/kazeta-plus-theme-creator.git)
-    cd YOUR_REPO
+    git clone https://github.com/the-outcaster/kazeta-plus-theme-creator.git
+    cd kazeta-plus-theme-creator
     ```
 
 2.  **Create a Python 3.12 virtual environment:**
