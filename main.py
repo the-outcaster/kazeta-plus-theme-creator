@@ -124,7 +124,7 @@ class KazetaThemeCreator:
         desc_text = "This application helps you create and edit themes for Kazeta+ by bundling assets and generating a theme.toml file."
         desc_label = ttk.Label(about_frame, text=desc_text, wraplength=350, justify="center")
         desc_label.pack(pady=5)
-        copyright_label = ttk.Label(about_frame, text="© 2025. All rights reserved.")
+        copyright_label = ttk.Label(about_frame, text="© 2025 Linux Gaming Central. All rights reserved.")
         copyright_label.pack(pady=(10, 15))
         ok_button = ttk.Button(about_frame, text="OK", command=about_window.destroy)
         ok_button.pack()
