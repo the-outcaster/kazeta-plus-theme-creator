@@ -6,15 +6,16 @@ set -e
 APP_NAME="KazetaThemeCreator"
 VERSION="1.1"
 MAIN_SCRIPT="main.py"
-ICON_NAME="kazeta_icon.png" # You need to create this icon file
+ICON_NAME="kazeta_icon.png"
 
-# --- UPDATE: Build paths are now in /tmp ---
+# --- Build paths are now in /tmp ---
 BUILD_PATH="/tmp/${APP_NAME}_build"
 DIST_PATH="/tmp/${APP_NAME}_dist"
 APPDIR="/tmp/${APP_NAME}.AppDir"
 
-# --- UPDATE: Final output directory is ~/Applications ---
+# --- Final output directory and tool path ---
 OUTPUT_DIR="${HOME}/Applications"
+APPIMAGE_TOOL_PATH="${OUTPUT_DIR}/appimagetool-x86_64.AppImage"
 
 echo "--- 1. Cleaning up old temporary builds from /tmp ---"
 rm -rf "$BUILD_PATH" "$DIST_PATH" "$APPDIR"
@@ -31,11 +32,8 @@ pyinstaller --noconfirm --onedir --windowed \
 echo "--- 3. Preparing the AppDir structure (in /tmp) ---"
 mkdir -p "$APPDIR"
 mv "$DIST_PATH"/"$APP_NAME"/* "$APPDIR/"
-
-# Copy the application icon into the AppDir
 cp "$ICON_NAME" "$APPDIR/"
 
-# Create the .desktop file for menu integration
 echo "Creating .desktop file..."
 cat <<EOF > "$APPDIR/$APP_NAME.desktop"
 [Desktop Entry]
@@ -46,7 +44,6 @@ Type=Application
 Categories=Utility;Development;
 EOF
 
-# Create the AppRun entry script
 echo "Creating AppRun script..."
 cat <<EOF > "$APPDIR/AppRun"
 #!/bin/bash
@@ -55,25 +52,27 @@ exec "\$HERE/$APP_NAME" "\$@"
 EOF
 chmod +x "$APPDIR/AppRun"
 
-echo "--- 4. Downloading appimagetool ---"
-if [ ! -f appimagetool-x86_64.AppImage ]; then
-    wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-    chmod +x appimagetool-x86_64.AppImage
+echo "--- 4. Checking for appimagetool in $OUTPUT_DIR ---"
+# Ensure the ~/Applications directory exists
+mkdir -p "$OUTPUT_DIR"
+if [ ! -f "$APPIMAGE_TOOL_PATH" ]; then
+    echo "Downloading appimagetool to $APPIMAGE_TOOL_PATH..."
+    wget -O "$APPIMAGE_TOOL_PATH" "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+    chmod +x "$APPIMAGE_TOOL_PATH"
+else
+    echo "appimagetool already exists."
 fi
 
 echo "--- 5. Building the AppImage ---"
-# This creates the AppImage in the local directory
-ARCH=x86_64 VERSION="$VERSION" ./appimagetool-x86_64.AppImage "$APPDIR"
+# Build the AppImage and place it in the local directory
+ARCH=x86_64 VERSION="$VERSION" "$APPIMAGE_TOOL_PATH" "$APPDIR"
 
-echo "--- 6. Moving AppImage to $OUTPUT_DIR ---"
-# Create the output directory if it doesn't exist
-mkdir -p "$OUTPUT_DIR"
-
-# Move the final AppImage
+echo "--- 6. Moving AppImage and cleaning up ---"
+# Move the final AppImage to the output directory
 mv "${APP_NAME}-${VERSION}-x86_64.AppImage" "$OUTPUT_DIR/"
 
-# Clean up the downloaded tool
-rm -f appimagetool-x86_64.AppImage
+# Clean up only the .spec file
+rm -f "${APP_NAME}.spec"
 
 echo ""
 echo "✅ Success!"
