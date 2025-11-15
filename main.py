@@ -269,6 +269,10 @@ class KazetaThemeCreator:
             # --- Create the progress window ---
             self._create_progress_window()
 
+            # Ensure the main theme directory always exists
+            self._update_progress("Setting up theme directories...")
+            os.makedirs(theme_dir, exist_ok=True)
+
             self._update_progress("Setting up theme directories...")
             if self.sfx_path.get():
                 os.makedirs(sfx_dir, exist_ok=True)

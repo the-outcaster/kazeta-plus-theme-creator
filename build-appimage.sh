@@ -3,7 +3,7 @@
 set -e
 
 # --- Configuration ---
-APP_NAME="KazetaThemeCreator"
+APP_NAME="Kazeta-Plus-Theme-Creator"
 VERSION="1.1"
 MAIN_SCRIPT="main.py"
 ICON_NAME="kazeta_icon.png"
