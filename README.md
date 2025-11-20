@@ -1,6 +1,6 @@
 # Kazeta+ Theme Creator
 
-![Screenshot of the application](https://i.imgur.com/Uhk0u0d.png)
+![Screenshot of the application](https://i.imgur.com/MnZ4Lyv.png)
 
 GUI application for creating and editing themes for [Kazeta+](https://github.com/the-outcaster/kazeta-plus). See the [Kazeta+ Wiki page](https://github.com/the-outcaster/kazeta-plus/wiki/Making-Your-Own-Themes) for more info.
 
