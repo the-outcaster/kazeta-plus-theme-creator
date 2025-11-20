@@ -51,9 +51,9 @@ class KazetaThemeCreator:
         main_frame.pack(fill=tk.BOTH, expand=True)
         main_frame.columnconfigure(1, weight=1)
 
-        positions = ["BottomLeft", "BottomRight", "TopLeft", "TopRight", "Center"]
+        positions = ["Center", "TopLeft", "TopRight", "BottomLeft", "BottomRight"]
         colors = ["WHITE", "BLACK", "PINK", "RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE"]
-        speeds = ["OFF", "SLOW", "NORMAL", "FAST"]
+        speeds = ["NORMAL", "SLOW", "FAST", "OFF"]
         cursor_styles = ["BOX", "TEXT"]
 
         row_idx = 0
