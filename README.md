@@ -2,64 +2,18 @@
 
 ![Screenshot of the application](https://i.imgur.com/Uhk0u0d.png)
 
-A simple, user-friendly GUI application for creating and editing themes for [Kazeta+](https://github.com/the-outcaster/kazeta-plus). This tool streamlines the entire theme creation process, from bundling assets to generating the final `theme.toml` file.
+GUI application for creating and editing themes for [Kazeta+](https://github.com/the-outcaster/kazeta-plus). See the [Kazeta+ Wiki page](https://github.com/the-outcaster/kazeta-plus/wiki/Making-Your-Own-Themes) for more info.
 
----
+## Downloads
+You'll need [FFmpeg](https://ffmpeg.org/download.html#build-linux) installed before running -- this is for for audio file conversion.
 
-## Features ✨
+Pre-built AppImages are available on the [Releases](https://github.com/the-outcaster/kazeta-plus-theme-creator/releases) page.
 
-* **Create from Scratch**: Easily create new themes with a straightforward graphical interface.
-* **Load & Edit**: Open an existing `theme.toml` file to load and modify a theme you've already created.
-* **Full Theming Control**: Access all `theme.toml` options, including colors, menu positions, and scroll speeds, through simple dropdowns and text fields.
-* **Automatic Asset Conversion**:
-    * Converts BGM tracks (e.g., MP3, WAV) to the required `.ogg` format.
-    * Converts logo and background images (e.g., JPG) to the required `.png` format.
-    * Converts SFX sound files from `.ogg` to the required `.wav` format.
-* **Smart Folder Export**: Automatically creates a clean, ready-to-use theme folder with all assets correctly named and organized.
-* **Overwrite Protection**: Asks for confirmation before overwriting an existing theme folder.
+## Building from Source
 
----
-
-## Getting Started (for Users) 🚀
-
-The easiest way to run the application is by using the pre-built AppImage.
-
-### Runtime Dependency
-
-Before you start, you **must** have **FFmpeg** installed on your system. The application uses it for audio file conversion.
-
-* **On Fedora/CentOS:**
-    ```bash
-    sudo dnf install ffmpeg
-    ```
-* **On Debian/Ubuntu:**
-    ```bash
-    sudo apt-get install ffmpeg
-    ```
-
-### Installation
-
-1.  Go to the **[Releases](https://github.com/the-outcaster/kazeta-plus-theme-creator/releases)** page of this project.
-2.  Download the latest `KazetaThemeCreator-vX.X-x86_64.AppImage` file.
-3.  Make the file executable:
-    ```bash
-    chmod +x KazetaThemeCreator-*.AppImage
-    ```
-4.  Run it!
-    ```bash
-    ./KazetaThemeCreator-*.AppImage
-    ```
-
----
-
-## Building from Source (for Developers) 🛠️
-
-If you prefer to run or build the application from its source code, follow these steps.
-
-### Prerequisites
-
-* **Python 3.12**: This version is required because the `pydub` library depends on the `audioop` module, which was removed in Python 3.13.
-* **FFmpeg**: See the installation instructions above.
+Prerequisites:
+* `python3.12`
+* `ffmpeg`
 
 ### Setup
 
@@ -94,7 +48,7 @@ If you prefer to run or build the application from its source code, follow these
 
 ### Building the AppImage
 
-The repository includes a helper script to build the AppImage.
+A helper script is included in the repo to build the AppImage.
 
 1.  **Install PyInstaller:**
     ```bash
@@ -106,7 +60,7 @@ The repository includes a helper script to build the AppImage.
     chmod +x build-appimage.sh
     ./build-appimage.sh
     ```
-    The script will automatically download `appimagetool`, bundle the application, and place the final `.AppImage` file in a new `release/` directory.
+    The script will automatically download `appimagetool`, bundle the application, and place the `.AppImage` in `~/Applications/`.
 
 ## Acknowledgments
 
