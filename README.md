@@ -12,7 +12,14 @@ Pre-built AppImages are available on the [Releases](https://github.com/the-outca
 ## Building from Source
 
 Prerequisites:
-* `python3.12`
+* `python3.x`
+* `python3-tk`
+* `python3-toml`
+* `python3-pil`
+* `python3-pydub`
+* `pyinstaller`
+* `fuse`
+* `file`
 * `ffmpeg`
 
 ### Setup

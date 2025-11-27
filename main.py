@@ -32,7 +32,6 @@ class KazetaThemeCreator:
 
         self.bg_scroll = tk.StringVar()
         self.color_shift = tk.StringVar()
-        # --- NEW VARIABLES ---
         self.cursor_blink = tk.StringVar()
         self.cursor_transition = tk.StringVar()
         self.cursor_style = tk.StringVar()
@@ -96,7 +95,13 @@ class KazetaThemeCreator:
         row_idx += 1
         self._create_file_picker(main_frame, "Logo Image (.png):", self.logo_path, [("Image Files", "*.png *.jpg *.jpeg *.bmp"), ("All files", "*.*")], row_idx)
         row_idx += 1
-        self._create_file_picker(main_frame, "Background Image (.png):", self.background_path, [("Image Files", "*.png *.jpg *.jpeg *.bmp"), ("All files", "*.*")], row_idx)
+        self._create_file_picker(
+            main_frame,
+            "Background (Img/Vid):", # Changed Label
+            self.background_path,
+            [("Media Files", "*.png *.jpg *.jpeg *.bmp *.mp4"), ("All files", "*.*")], # Added .mp4
+            row_idx
+        )
         row_idx += 1
         self._create_file_picker(main_frame, "Font File (.ttf):", self.font_path, [("Font Files", "*.ttf"), ("All files", "*.*")], row_idx)
         row_idx += 1
@@ -230,8 +235,6 @@ class KazetaThemeCreator:
             self.cursor_color.set(data.get('cursor_color', 'WHITE'))
             self.bg_scroll.set(data.get('background_scroll_speed', 'OFF'))
             self.color_shift.set(data.get('color_shift_speed', 'OFF'))
-
-            # --- NEW FIELDS LOAD ---
             self.cursor_blink.set(data.get('cursor_blink_speed', 'NORMAL'))
             self.cursor_transition.set(data.get('cursor_transition_speed', 'NORMAL'))
             self.cursor_style.set(data.get('cursor_style', 'BOX'))
@@ -293,10 +296,20 @@ class KazetaThemeCreator:
                 self._update_progress("Converting logo image...")
                 self._convert_and_copy_image(self.logo_path.get(), os.path.join(theme_dir, logo_filename))
 
-            bg_filename = f"{safe_theme_name}_background.png"
+            bg_filename = "None"
             if self.background_path.get():
-                self._update_progress("Converting background image...")
-                self._convert_and_copy_image(self.background_path.get(), os.path.join(theme_dir, bg_filename))
+                source_path = self.background_path.get()
+                # Check extension to decide if it's video or image
+                ext = pathlib.Path(source_path).suffix.lower()
+
+                if ext == ".mp4":
+                    bg_filename = f"{safe_theme_name}_background.mp4"
+                    self._update_progress("Copying background video...")
+                    self._safe_copy(source_path, os.path.join(theme_dir, bg_filename))
+                else:
+                    bg_filename = f"{safe_theme_name}_background.png"
+                    self._update_progress("Converting background image...")
+                    self._convert_and_copy_image(source_path, os.path.join(theme_dir, bg_filename))
 
             font_filename = f"{safe_theme_name}_font.ttf"
             if self.font_path.get():
@@ -322,14 +335,12 @@ class KazetaThemeCreator:
                 'cursor_color': self.cursor_color.get(),
                 'background_scroll_speed': self.bg_scroll.get(),
                 'color_shift_speed': self.color_shift.get(),
-                # --- NEW EXPORT FIELDS ---
                 'cursor_blink_speed': self.cursor_blink.get(),
                 'cursor_transition_speed': self.cursor_transition.get(),
                 'cursor_style': self.cursor_style.get(),
-                # -------------------------
                 'bgm_track': bgm_filename if self.bgm_path.get() else "None",
                 'logo_selection': logo_filename if self.logo_path.get() else "None",
-                'background_selection': bg_filename if self.background_path.get() else "None",
+                'background_selection': bg_filename, # Uses the logic calculated above
                 'font_selection': font_filename if self.font_path.get() else "None",
                 'sfx_pack': sfx_pack_name if self.sfx_path.get() else "None"
             }
