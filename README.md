@@ -1,5 +1,7 @@
 # Kazeta+ Theme Creator
 
+**UPDATE:** as of [KZI Cartridge Generator version 2.0](https://github.com/the-outcaster/kzi-cartridge-generator/releases/tag/2.0), the code from this repo has been merged into the latter. As such, this repo will no longer be maintained. Any future updates to Kazeta+ Theme Creator will be done through KZI Cartridge Generator.
+
 ![Screenshot of the application](https://i.imgur.com/MnZ4Lyv.png)
 
 GUI application for creating and editing themes for [Kazeta+](https://github.com/the-outcaster/kazeta-plus). See the [Kazeta+ Wiki page](https://github.com/the-outcaster/kazeta-plus/wiki/Making-Your-Own-Themes) for more info.
